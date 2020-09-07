@@ -1,0 +1,17 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-golang:latest-buster-build as build
+WORKDIR /root
+RUN go get github.com/pardegerman/irhid && go build github.com/pardegerman/irhid
+
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster
+RUN install_packages xxd ir-keytable systemd
+
+WORKDIR /app
+COPY entrypoint.sh .
+COPY create-virtkbd.sh . 
+COPY ir_keycodes .
+COPY --from=build /root/irhid .
+
+ENV DBUS_SYSTEM_BUS_ADDRESS unix:path=/host/run/dbus/system_bus_socket
+
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["./irhid", "/dev/input/event0", "/dev/hidg0"]

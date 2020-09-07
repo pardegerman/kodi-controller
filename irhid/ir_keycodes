@@ -1,0 +1,11 @@
+# table exibel, type: nec
+0xa01c KEY_POWER	# Power button
+0xa010 KEY_BACKSPACE	# Menu button
+0xa01b KEY_MUTE		# Mute button
+0xa01a KEY_H		# AV/TV button
+0xa059 KEY_UP		# Up
+0xa051 KEY_DOWN		# Down
+0xa056 KEY_LEFT		# Left
+0xa014 KEY_RIGHT	# Right
+0xa055 KEY_ENTER	# OK button
+
